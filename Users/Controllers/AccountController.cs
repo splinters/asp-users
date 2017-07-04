@@ -41,6 +41,12 @@ namespace Users.Controllers
                 ClaimsIdentity ident = await UserManager.CreateIdentityAsync(user,
                     DefaultAuthenticationTypes.ApplicationCookie);
 
+                //вычитать доп утверждения
+                ident.AddClaims(LocationClaimsProvider.GetClaims(ident));
+                //доп сконструированные утверждения
+                ident.AddClaims(ClaimsRoles.CreateRolesFromClaims(ident));
+                
+
                 AuthManager.SignOut();
                 AuthManager.SignIn(new AuthenticationProperties
                 {

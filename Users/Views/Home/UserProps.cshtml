@@ -1,0 +1,55 @@
+﻿@using Users.Controllers
+@using System.Linq
+@using Users.Models
+@model AppUser
+
+@{ ViewBag.Title = "Пользовательские свойства"; }
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Пользовательские свойства
+    </div>
+    <table class="table table-striped">
+        <tr><th>Текущий город</th><td>@HomeController.GetCityName(Model.City)</td></tr>
+        <tr><th>Страна</th><td>@HomeController.GetCityName(Model.Country)</td></tr>
+        <tr><th>Статус</th><td>@HomeController.GetStatusName(Model.Status)</td></tr>
+    </table>
+</div>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <label>Город: </label>
+        @Html.DropDownListFor(x => x.City, new SelectList(
+                Enum.GetValues(typeof(Cities))
+                .OfType<Cities>()
+                  .Select(c =>
+                  {
+                      return new
+                      {
+                          Id = c,
+                          Text = HomeController.GetCityName(c)
+                      };
+                  }),
+                "Id", "Text"
+        ))
+
+        <label>Статус: </label>
+        @Html.DropDownListFor(x => x.City, new SelectList(
+                Enum.GetValues(typeof(Status))
+                .OfType<Status>()
+                  .Select(c =>
+                  {
+                      return new
+                      {
+                          Id = c,
+                          Text = HomeController.GetStatusName(c)
+                      };
+                  }),
+                "Id", "Text"
+        ))
+
+
+    </div>
+    <button class="btn btn-primary" type="submit">Сохранить</button>
+}

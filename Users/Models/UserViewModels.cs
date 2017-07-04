@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 
-
 namespace Users.Models
 {
     public class CreateModel
@@ -42,4 +41,6 @@ namespace Users.Models
         public string[] IdsToAdd { get; set; }
         public string[] IdsToDelete { get; set; }
     }
+
+ 
 }
