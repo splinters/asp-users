@@ -7,6 +7,8 @@ using Users.Models;
 
 namespace Users.Infrastructure
 {
+
+/*
     public class CustomUserValidator : UserValidator<AppUser>
     {
         public CustomUserValidator(AppUserManager manager)
@@ -43,4 +45,30 @@ namespace Users.Infrastructure
 //            return result;
         }
     }
+*/
+    /// <summary>
+    /// Проверку данных пользователя необходимо оставить, т.к. по умолчанию, в ASP.NET Identity в логине можно указывать только буквы английского алфавита. 
+    /// ранее мы добавили класс CustomUserValidator, где отключили эту проверку:
+    /// </summary>
+    public class CustomUserValidator : IIdentityValidator<AppUser>
+    {
+        public async Task<IdentityResult> ValidateAsync(AppUser item)
+        {
+            List<string> errors = new List<string>();
+
+            if (String.IsNullOrEmpty(item.UserName.Trim()))
+                errors.Add("Вы указали пустое имя.");
+
+            string userNamePattern = @"^[a-zA-Z0-9а-яА-Я]+$";
+
+            if (!Regex.IsMatch(item.UserName, userNamePattern))
+                errors.Add("В имени разрешается указывать буквы английского или русского языков, и цифры");
+
+            if (errors.Count > 0)
+                return IdentityResult.Failed(errors.ToArray());
+
+            return IdentityResult.Success;
+        }
+    }
+
 }

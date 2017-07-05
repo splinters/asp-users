@@ -1,0 +1,10 @@
+﻿
+Google
+https://console.developers.google.com/apis/
+
+Идентификатор клиента	
+142161729771-knfisofc81t7gr55h79m96gq9q6vlkus.apps.googleusercontent.com
+Секрет клиента	
+2bmhba9gFBORpEHUMIwVQXfH
+Дата создания	
+26 июн. 2017 г., 12:12:28

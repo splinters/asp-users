@@ -10,6 +10,8 @@ using Users.Models;
 
 namespace Users.Infrastructure
 {
+
+ 
     public class AppUserManager : UserManager<AppUser>
     {
         public AppUserManager(IUserStore<AppUser> store)
@@ -42,7 +44,10 @@ namespace Users.Infrastructure
                 Если установлено значение true, пароль должен содержать прописные символы
             */
 
-//            manager.PasswordValidator = new PasswordValidator  // стандартный и кастомный пасворд валидатор
+            //            manager.PasswordValidator = new PasswordValidator  // стандартный и кастомный пасворд валидатор
+
+            // при валидации через внешние источники - отключить пользовательскую проверку пароля
+            /*
             manager.PasswordValidator = new CustomPasswordValidator
             {
                 RequiredLength = 6,
@@ -51,6 +56,7 @@ namespace Users.Infrastructure
                 RequireLowercase = false,
                 RequireUppercase = false
             };
+            */
 
             /*Свойства, определенные в классе UserValidator
             Название	Описание
@@ -62,12 +68,14 @@ namespace Users.Infrastructure
             */
 
             //manager.UserValidator = new UserValidator<AppUser>(manager)
-             manager.UserValidator = new CustomUserValidator(manager)  // с кастомным валидатором юзеров
+            /*
+            manager.UserValidator = new CustomUserValidator(manager)  // с кастомным валидатором юзеров
              {
                 AllowOnlyAlphanumericUserNames = true,
                 RequireUniqueEmail = false
             };
-
+            */
+            manager.UserValidator = new CustomUserValidator();
 
             return manager;
         }

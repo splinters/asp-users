@@ -21,3 +21,13 @@
     </div>
     <button class="btn btn-primary" type="submit">Увійти</button>
 }
+
+<br />
+
+@using (Html.BeginForm("GoogleLogin", "Account", FormMethod.Post, new { style = "margin-top:12px" }))
+{
+    <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+    <button class="btn btn-primary" type="submit">
+        Увійти за допомогою екаунта Google
+    </button>
+}
